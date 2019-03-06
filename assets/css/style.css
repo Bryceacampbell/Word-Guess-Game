@@ -1,0 +1,32 @@
+body {
+    background: url("/assets/images/3590.jpg");
+    
+}
+header {
+    background-color:blueviolet !important;
+    color: #ffffff;
+    font-size: 4rem;
+    padding: 20px !important;
+}
+
+.btn {
+    background-color:blueviolet !important;
+    color: #ffffff;
+    margin: auto;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+.container {
+    background-color: #ffffff;
+}
+.counter {
+    margin: auto;
+    padding: 20px;
+    text-align: center;
+}
+#hidden-word {
+    letter-spacing: 10px;
+}
+.col-12 h1 {
+    padding: 30px;
+}

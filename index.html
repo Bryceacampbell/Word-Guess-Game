@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,25 +8,54 @@
     <title>Word Guess Game</title>
     <link rel="stylesheet" href="assets/css/reset.css" type="text/css">
     <link rel="stylesheet" href="assets/css/style.css" type="text/css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="assets/css/style.css" type="text/css">
     <script src="assets/javascript/game.js"></script>
 </head>
+
 <body>
-    
-    <h1>Ice Cream Word Guess</h1>
 
-    <button onclick="game.startGame()">Press here to start</button>
+    <header class="jumbotron text-center">
+        <p>Ice Cream Word Guess</p>
+    </header>
 
-    <h1 id="hidden-word"></h1>
+    <div class="container">
+        <div class="row text-center">
+            <div class="col-12">
+                <button onclick="game.startGame()" class="btn">Press here to start</button>
+            </div>
+        </div>
 
-    <h1>Wrong Guesses: <span id="wrong-guesses"></span></h1>
+        <div class="row text-center">
+            <div class="col-12">
+                <h1 id="hidden-word"></h1>
+            </div>
+        </div>
 
-    <h1>Guesses Left: <span id="guesses-left">12</span></h1>
+        <div class="row">
+            <div class="col-12">
+                <h1>Wrong Guesses: <span id="wrong-guesses"></span></h1>
+            </div>
+        </div>
 
-    <h1>Wins:<span id="wins-counter"> 0</span></h1>
+        <div class="row">
+            <div class="col-4">
+            <h1 class="counter">Guesses Left: <span id="guesses-left">12</span></h1>
+            </div>
+            <div class="col-4">
+            <h1 class="counter">Wins:<span id="wins-counter"> 0</span></h1>
+            </div>
+            <div class="col-4">
+            <h1 class="counter">Losses:<span id="losses-counter"> 0</span></h1>
+            </div>
+        </div>
 
-    <h1>Losses:<span id="losses-counter"> 0</span></h1>
-    
-    
+
+    </div>
+
+
 
 </body>
+
 </html>
