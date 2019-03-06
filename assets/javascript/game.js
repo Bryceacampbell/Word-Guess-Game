@@ -1,53 +1,89 @@
-//gloabal variables
-var userGuess;
-
-// String.prototype.replaceAt = function () {
-//     for (var j = 0; j < this.randomWord.length; j++) {
-//         this.underscores = game.replaceAt(this.underscores, j, userGuess);
-//         document.getElementById("hidden-word").innerHTML = this.underscores;
-//     }
-// }
 
 var game = {
 
     wordBank: ["vanilla", "chocolate", "cookie dough", "mint chocolate chip", "rocky road"],
-    guessesLeft: 12,
-    wrongGuesses: "",
-    wins: 0,
-    losses: 0,
+    guessesLeft: null,
+    wrongGuesses: [],
+    wins: null,
+    losses: null,
     randomWord: "",
     underscores: "",
+    session: 0,
 
-    
 
-    //create a function to determine what happens when the game is started
     startGame: function () {
 
         this.guessesLeft = 12;
         document.getElementById("guesses-left").innerHTML = this.guessesLeft;
 
-        //math function to pick a random word out of wordBank[] and stores it into a variable called randomWord
-        this.randomWord = this.wordBank[Math.floor(Math.random() * this.wordBank.length)];
+        this.wrongGuesses = [];
+
+        this.underscores = "";
+
+        this.randomWord = this.wordBank[this.session];
+
         console.log(this.randomWord);
 
-        //for loop to create underscores for each letter of the chosen randomWord
+        this.generateUnderscores();
+
+        document.getElementById("hidden-word").innerHTML = this.underscores;
+
     
     },
 
-    //checker function to check if user guess is equal to the indexOf randomWord
-    checker: function () {
-        var guessIndex = this.randomWord.indexOf(userGuess);
+    isUserGuessDuplicate: function (userGuess) {
+        return this.wrongGuesses.includes(userGuess) || this.underscores.includes(userGuess);
+    },
+
+
+    generateUnderscores: function () {
+
+        for (var i = 0; i < this.randomWord.length; i++) {
+            this.underscores += "_";
+        }
+        
+    },
+    
+
+    updateUnderscores: function (userGuess) {
+        
+        var underscoresArray = this.underscores.split("");
+
+        for (let index = 0; index < this.randomWord.length; index++) {
+
+            if (userGuess === this.randomWord[index]) {
+                underscoresArray[index] = userGuess;
+            }
+        }
+
+        this.underscores = underscoresArray.join("");
+
+        document.getElementById("hidden-word").innerHTML = this.underscores;
+
+        if (!this.underscores.includes("_")) {
+            this.session++;
+            this.wins();
+        }
+    },
+
+
+    checker: function (userGuess) {
+
+        if (this.isUserGuessDuplicate(userGuess)) return;
+
+        var guessIndex = this.randomWord.includes(userGuess);
         if (!guessIndex) {
             this.guessesLeft--;
+            this.wrongGuesses.push(userGuess);
+            document.getElementById("wrong-guesses").innerHTML = this.wrongGuesses.join("");
             document.getElementById("guesses-left").innerHTML = this.guessesLeft;
-            
-            // dont update `underscores`
         }
         else {
-            this.underscores[guessIndex] = userGuess;
+            this.updateUnderscores(userGuess);
             this.guessesLeft--;
             document.getElementById("guesses-left").innerHTML = this.guessesLeft;
         }
+
         if (this.guessesLeft === 0) {
             this.losses();
         }
@@ -59,12 +95,15 @@ var game = {
         document.getElementById("wins-counter").innerHTML = this.wins;
         this.startGame();
     },
+
     losses: function () {
         alert("you lose!");
         this.losses++;
+        console.log(this.losses);
         document.getElementById("losses-counter").innerHTML = this.losses;
         this.startGame();
     }
+
 }
 
 //onkeyup event listener to determine what key is being pressed
@@ -73,8 +112,8 @@ document.onkeyup = function (event) {
     userGuess = event.key;
 
     //initiate checker function
-    game.checker();
+    game.checker(userGuess);
+    
 
-    console.log(userGuess);
 }
 
