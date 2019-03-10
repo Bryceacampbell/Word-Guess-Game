@@ -82,8 +82,6 @@ wins = function () {
 losses = function () {
     alert("you lose!");
     game.losses++;
-    
-    console.log(game.losses);
     document.getElementById("losses-counter").innerHTML = game.losses;
     game.startGame();
 };
